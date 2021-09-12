@@ -4,8 +4,7 @@ import MapForm from "./components/Form";
 import axios from "axios";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+import "bootstrap/dist/css/bootstrap.min.css";
 
 class App extends Component {
   constructor(props) {
@@ -14,6 +13,7 @@ class App extends Component {
       placeName: "",
       lat: "",
       lon: "",
+      map:"",
       showData: false,
     };
   }
@@ -22,6 +22,7 @@ class App extends Component {
     let placeName = event.target.value;
     this.setState({
       placeName: placeName,
+      map:'',
     });
   };
 
@@ -47,15 +48,19 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <MapForm handleSubmit={this.handleSubmit} handlePlace={this.handlePlace} />
+        <MapForm
+          handleSubmit={this.handleSubmit}
+          handlePlace={this.handlePlace}
+        />
         {this.state.showData && (
           <Location
             placeName={this.state.placeName}
             lat={this.state.lat}
             lon={this.state.lon}
+            map={this.state.map}
           />
         )}
-        <Footer/>
+        <Footer />
       </div>
     );
   }
