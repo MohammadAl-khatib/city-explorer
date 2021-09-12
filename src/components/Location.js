@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Card } from "react-bootstrap";
-import { col } from "react-bootstrap";
-
 
 export class Location extends Component {
   render() {
