@@ -5,6 +5,8 @@ import axios from "axios";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
+import AlertMessage from "./components/AlertMessage";
+
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +16,9 @@ class App extends Component {
       lat: "",
       lon: "",
       map:"",
+      error:"",
       showData: false,
+      showError:false
     };
   }
 
@@ -41,6 +45,12 @@ class App extends Component {
         lat: response.lat,
         showData: true,
       });
+    }).catch(err=>{
+      console.log(err.message);
+      this.setState({
+        error:err.message,
+        showError:true
+      })
     });
   };
 
@@ -60,6 +70,7 @@ class App extends Component {
             map={this.state.map}
           />
         )}
+        {this.state.showError && <AlertMessage error={this.state.error}/>}
         <Footer />
       </div>
     );
