@@ -49,20 +49,28 @@ class App extends Component {
         });
       })
       .catch((err) => {
+        console.log(typeof err);
         this.setState({
           error: err.message,
           showError: true,
+          showData:false
         });
       })
       .then(() => {
         axios.get(
           `http://${process.env.REACT_APP_BACKEND_URL}/weather?lat=${this.state.lat}&lon=${this.state.lon}`
         ).then((res) => {
-          console.log(res.data);
           this.setState({ 
             weatherData:res.data
           });
         });;
+      })
+      .catch((err) => {
+        console.log('err');
+        this.setState({
+          error: err.message,
+          showError: true,
+        });
       })
   };
 
