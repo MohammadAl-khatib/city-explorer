@@ -48,4 +48,19 @@ img{
   height: 400px;
   float: left;
 }
-
+.movie{
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: auto auto auto;
+  float: left;
+}
+.main-content{
+  display:block;
+}
+body{
+  /* width:700px; */
+}
+.movie .card{
+display:block;
+float:none
+}
