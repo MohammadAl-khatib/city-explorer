@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AlertMessage from "./components/AlertMessage";
-
+import Weather from "./components/Weather";
 
 class App extends Component {
   constructor(props) {
@@ -15,10 +15,11 @@ class App extends Component {
       placeName: "",
       lat: "",
       lon: "",
-      map:"",
-      error:"",
+      map: "",
       showData: false,
-      showError:false
+      error: "",
+      showError: false,
+      weatherData: [],
     };
   }
 
@@ -26,7 +27,7 @@ class App extends Component {
     let placeName = event.target.value;
     this.setState({
       placeName: placeName,
-      map:'',
+      map: "",
     });
   };
 
@@ -37,21 +38,32 @@ class App extends Component {
       baseURL: `https://api.locationiq.com/v1/autocomplete.php?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.placeName}`,
     };
 
-    axios(config).then((res) => {
-      let response = res.data[0];
-      this.setState({
-        placeName: response.display_name,
-        lon: response.lon,
-        lat: response.lat,
-        showData: true,
-      });
-    }).catch(err=>{
-      console.log(err.message);
-      this.setState({
-        error:err.message,
-        showError:true
+    axios(config)
+      .then((res) => {
+        let response = res.data[0];
+        this.setState({
+          placeName: response.display_name,
+          lon: response.lon,
+          lat: response.lat,
+          showData: true,
+        });
       })
-    });
+      .catch((err) => {
+        this.setState({
+          error: err.message,
+          showError: true,
+        });
+      })
+      .then(() => {
+        axios.get(
+          `http://${process.env.REACT_APP_BACKEND_URL}/weather?lat=${this.state.lat}&lon=${this.state.lon}`
+        ).then((res) => {
+          console.log(res.data);
+          this.setState({ 
+            weatherData:res.data
+          });
+        });;
+      })
   };
 
   render() {
@@ -70,7 +82,8 @@ class App extends Component {
             map={this.state.map}
           />
         )}
-        {this.state.showError && <AlertMessage error={this.state.error}/>}
+        {this.state.showError && <AlertMessage error={this.state.error} />}
+        <Weather weatherData={this.state.weatherData} />
         <Footer />
       </div>
     );
