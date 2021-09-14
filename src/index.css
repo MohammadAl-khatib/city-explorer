@@ -40,10 +40,12 @@ Form{
 }
 .card{
   float: left;
-  margin-left: 350px;
+  margin-left: 150px;
+  margin-right:120px;
 }
 img{
   width:400px;
   height: 400px;
+  float: left;
 }
 
