@@ -84,7 +84,6 @@ class App extends Component {
           movieData: res.data,
           showMovie:true
         });
-        console.log(this.state.movieData)
       });
   };
 

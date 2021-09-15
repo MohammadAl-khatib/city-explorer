@@ -12,15 +12,66 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-body{
-  position: relative;
-  min-height: 100vh;
+#bootstrap-overrides body{
   margin:auto;
+  width: 50%;
 }
 *{
   text-align: center;
 }
 
+#bootstrap-overrides form input{
+  width:20rem;
+  margin:auto;
+}
+#bootstrap-overrides h1{
+  font-family: 'Roboto', sans-serif;
+  margin-top:5rem;
+  margin-bottom:1rem;
+}
+Form{
+  margin-bottom:1rem;
+}
+.card{
+  float: left;
+  margin-left: 17rem;
+  margin-right:10rem;
+}
+img{
+  width:400px;
+  height: 400px;
+}
+.main-content{
+  display:block;
+  margin-bottom: 20px;
+}
+#weather-content{
+  margin-top: 25px;
+}
+#weather-content>div{
+margin-left: 0px;
+margin-right: 0px;
+float: none;
+display: inline-block;
+}
+#weather-content>div:nth-child(odd){
+  background-color: darkcyan;
+  color: aliceblue;
+  }
+.movie{
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: auto auto auto;
+  float: left;
+  margin-top:60px;
+  justify-content:center;
+}
+
+.movie .card{
+  float: left;
+  margin-left: 100px;
+  margin-right:100px;
+}
 .footer{
   background-color: #6a758a;
   color:white;
@@ -30,37 +81,4 @@ body{
   width: 100%;
   height: 2.5rem; 
   margin-top:25px; 
-}
-h1{
-  font-family: 'Roboto', sans-serif;
-  margin-top:20px;
-  margin-bottom:50px;
-}
-Form{
-  margin-bottom:50px;
-}
-.card{
-  float: left;
-  margin-left: 150px;
-  margin-right:120px;
-}
-img{
-  width:400px;
-  height: 400px;
-  float: left;
-}
-.movie{
-  display: grid;
-  grid-template-rows: auto auto auto;
-  grid-template-columns: auto auto auto;
-  float: left;
-  margin-top:60px;
-  gap:0px;
-  justify-content:center;
-}
-.main-content{
-  display:block;
-}
-.movie .card{
-
 }
