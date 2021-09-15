@@ -3,7 +3,7 @@ import Location from "./components/Location";
 import MapForm from "./components/Form";
 import axios from "axios";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AlertMessage from "./components/AlertMessage";
 import Weather from "./components/Weather";
@@ -61,7 +61,7 @@ class App extends Component {
 
     axios
       .get(
-        `http://${process.env.REACT_APP_BACKEND_URL}/weather?lat=${this.state.lat}&lon=${this.state.lon}`
+        `https://mohammad-city-explorer-api.herokuapp.com/weather?lat=${this.state.lat}&lon=${this.state.lon}`
       )
       .then((res) => {
         this.setState({
@@ -77,7 +77,7 @@ class App extends Component {
 
     axios
       .get(
-        `http://${process.env.REACT_APP_BACKEND_URL}/movies?place=${this.state.placeName}`
+        `https://mohammad-city-explorer-api.herokuapp.com/movies?place=${this.state.placeName}`
       )
       .then((res) => {
         this.setState({
@@ -111,7 +111,7 @@ class App extends Component {
         <div class='movie'>
         {this.state.showMovie && <Movie movieData = {this.state.movieData}/>}
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }

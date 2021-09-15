@@ -15,6 +15,7 @@ code {
 body{
   position: relative;
   min-height: 100vh;
+  margin:auto;
 }
 *{
   text-align: center;
@@ -53,14 +54,13 @@ img{
   grid-template-rows: auto auto auto;
   grid-template-columns: auto auto auto;
   float: left;
+  margin-top:60px;
+  gap:0px;
+  justify-content:center;
 }
 .main-content{
   display:block;
 }
-body{
-  /* width:700px; */
-}
 .movie .card{
-display:block;
-float:none
+
 }
