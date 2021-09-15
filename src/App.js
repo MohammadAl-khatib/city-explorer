@@ -61,7 +61,7 @@ class App extends Component {
 
     axios
       .get(
-        `https://mohammad-city-explorer-api.herokuapp.com/weather?lat=${this.state.lat}&lon=${this.state.lon}`
+        `${process.env.REACT_APP_BACKEND_BASE_URL}weather?lat=${this.state.lat}&lon=${this.state.lon}`
       )
       .then((res) => {
         this.setState({
@@ -77,7 +77,7 @@ class App extends Component {
 
     axios
       .get(
-        `https://mohammad-city-explorer-api.herokuapp.com/movies?place=${this.state.placeName}`
+        `${process.env.REACT_APP_BACKEND_BASE_URL}movies?place=${this.state.placeName}`
       )
       .then((res) => {
         this.setState({
