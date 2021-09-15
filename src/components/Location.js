@@ -7,7 +7,7 @@ export class Location extends Component {
       <div>
         <Card style={{ width: "18rem" }}>
           <Card.Body>
-            <Card.Title>{this.props.placeName}</Card.Title>
+            <Card.Title>{this.props.placeName.split(',')[0]}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">
               Coordinations
             </Card.Subtitle>
