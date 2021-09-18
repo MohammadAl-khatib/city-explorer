@@ -32,6 +32,14 @@ code {
 Form{
   margin-bottom:1rem;
 }
+#bootstrap-overrides .heading{
+  display: block;
+  background-color: rgb(191, 169, 212);
+  margin-top: 20px;
+  font-family: 'Roboto', sans-serif;
+  width: fit-content;
+  margin-left: 30px;
+}
 .card{
   float: left;
   margin-left: 17rem;
@@ -65,12 +73,23 @@ display: inline-block;
   float: left;
   margin-top:60px;
   justify-content:center;
+  grid-row-gap: 30px;
 }
 
 .movie .card{
   float: left;
   margin-left: 100px;
   margin-right:100px;
+  overflow: hidden;
+
+}
+.movie .card .card-body{
+  height:250px;
+  overflow:scroll;
+}
+.card-body::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
 }
 .footer{
   background-color: #6a758a;

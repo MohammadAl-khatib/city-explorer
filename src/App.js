@@ -18,11 +18,11 @@ class App extends Component {
       lon: "",
       map: "",
       showData: false,
-      error: "",
+      error: "Please, enter valid city name",
       showError: false,
       weatherData: [],
       movieData: [],
-      showMovie:false
+      showMovie: false,
     };
   }
 
@@ -49,40 +49,43 @@ class App extends Component {
           lon: response.lon,
           lat: response.lat,
           showData: true,
+          showError: false,
         });
+      })
+      .then((res) => {
+        axios
+          .get(
+            `${process.env.REACT_APP_BACKEND_BASE_URL}weather?lat=${this.state.lat}&lon=${this.state.lon}`
+          )
+          .then((res) => {
+            this.setState({
+              weatherData: res.data,
+            });
+          })
+          .catch((err) => {
+            this.setState({
+              error: err.message,
+              showError: true,
+            });
+          });
+        axios
+          .get(
+            `${process.env.REACT_APP_BACKEND_BASE_URL}movies?place=${
+              this.state.placeName.split(",")[0]
+            }`
+          )
+          .then((res) => {
+            this.setState({
+              movieData: res.data,
+              showMovie: true,
+            });
+          });
       })
       .catch((err) => {
         this.setState({
-          error: err.message,
           showError: true,
           showData: false,
-        });
-      });
-
-    axios
-      .get(
-        `${process.env.REACT_APP_BACKEND_BASE_URL}weather?lat=${this.state.lat}&lon=${this.state.lon}`
-      )
-      .then((res) => {
-        this.setState({
-          weatherData: res.data,
-        });
-      })
-      .catch((err) => {
-        this.setState({
-          error: err.message,
-          showError: true,
-        });
-      });
-
-    axios
-      .get(
-        `${process.env.REACT_APP_BACKEND_BASE_URL}movies?place=${this.state.placeName}`
-      )
-      .then((res) => {
-        this.setState({
-          movieData: res.data,
-          showMovie:true
+          showMovie: false,
         });
       });
   };
@@ -92,23 +95,29 @@ class App extends Component {
       <div>
         <Header />
         <div class="main-content">
-        <MapForm
-          handleSubmit={this.handleSubmit}
-          handlePlace={this.handlePlace}
-        />
-        {this.state.showData && (
-          <Location
-            placeName={this.state.placeName}
-            lat={this.state.lat}
-            lon={this.state.lon}
-            map={this.state.map}
+          <MapForm
+            handleSubmit={this.handleSubmit}
+            handlePlace={this.handlePlace}
           />
-        )}
-        {this.state.showError && <AlertMessage error={this.state.error} />}
-        <Weather weatherData={this.state.weatherData} />
+          {this.state.showError && <AlertMessage error={this.state.error} />}
+
+          <h3 class="heading">Location Information</h3>
+          {this.state.showData && (
+            <Location
+              placeName={this.state.placeName}
+              lat={this.state.lat}
+              lon={this.state.lon}
+              map={this.state.map}
+            />
+          )}
+          <h3 class="heading">Weather Forecast for 16 Days</h3>
+          {this.state.showData && (
+            <Weather weatherData={this.state.weatherData} />
+          )}
         </div>
-        <div class='movie'>
-        {this.state.showMovie && <Movie movieData = {this.state.movieData}/>}
+        <h3 class="heading">Related Movies</h3>
+        <div class="movie">
+          {this.state.showMovie && <Movie movieData={this.state.movieData} />}
         </div>
         {/* <Footer /> */}
       </div>
